@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { MoonIcon } from './Icons'
+import { lightTheme } from '../styles/theme'
 
 export function Heading () {
   return (
@@ -17,11 +18,12 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 40
   },
   title: {
-    color: '#fff',
-    fontSize: 20,
+    color: lightTheme.light,
+    fontSize: 24,
     fontFamily: 'JosefinSans-Bold',
     letterSpacing: 10
   }
