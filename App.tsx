@@ -6,7 +6,7 @@ import { useLoadFonts } from './hooks/useLoadFonts'
 import { useEffect, useState } from 'react'
 import { lightTheme } from './styles/theme'
 
-SplashScreen.preventAutoHideAsync()
+void SplashScreen.preventAutoHideAsync()
 
 export default function App () {
   const { loadFonts } = useLoadFonts()
