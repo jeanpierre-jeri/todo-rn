@@ -1,6 +1,7 @@
-import { Image, StyleSheet, TextInput, View } from 'react-native'
-import { lightTheme } from '../styles/theme'
+import { Image, StyleSheet, View } from 'react-native'
 import { Heading } from './Heading'
+import { TaskList } from './TaskList'
+import { AddTask } from './AddTask'
 
 export function Layout () {
   return (
@@ -8,9 +9,8 @@ export function Layout () {
       <Image style={styles.image} source={require('../assets/bg-mobile-light.jpg')} />
       <View style={styles.container}>
         <Heading />
-        <View>
-          <TextInput style={styles.input} placeholder='Create a new todo...' />
-        </View>
+        <AddTask />
+        <TaskList />
       </View>
     </View>
   )
@@ -19,19 +19,11 @@ export function Layout () {
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 48,
-    paddingHorizontal: 24,
-    gap: 40
+    paddingHorizontal: 24
   },
   image: {
     width: '100%',
     height: 200,
     position: 'absolute'
-  },
-  input: {
-    width: '100%',
-    backgroundColor: lightTheme.light,
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-    borderRadius: 3
   }
 })
