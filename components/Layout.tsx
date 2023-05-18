@@ -2,6 +2,7 @@ import { Image, StyleSheet, View } from 'react-native'
 import { Heading } from './Heading'
 import { TaskList } from './TaskList'
 import { AddTask } from './AddTask'
+import { Footer } from './Footer'
 
 export function Layout () {
   return (
@@ -11,6 +12,7 @@ export function Layout () {
         <Heading />
         <AddTask />
         <TaskList />
+        <Footer />
       </View>
     </View>
   )
