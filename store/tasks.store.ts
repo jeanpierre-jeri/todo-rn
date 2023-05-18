@@ -1,17 +1,17 @@
 import { create } from 'zustand'
-import { Task } from '../types'
+import { FilterType, Task } from '../types'
 import * as Crypto from 'expo-crypto'
 
 const initialTasks = [
   {
     id: Crypto.randomUUID(),
-    title: 'I have to be the best develoepr in the world and rule the world with javascript',
+    title: 'I have to be the best develoepr in the world and rule the world with javascript and typescript',
     completed: true
 
   },
   {
     id: Crypto.randomUUID(),
-    title: 'Complete online JavaScript course',
+    title: 'Complete online JavaScript course 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16',
     completed: true
 
   },
@@ -40,13 +40,17 @@ const initialTasks = [
 
 interface TaskStore {
   tasks: Task[]
+  filteredTasks: Task[]
   addTask: (title: string) => void
   removeTask: (id: string) => void
   toggleTask: (id: string) => void
+  clearCompletedTasks: () => void
+  filterTasks: (filter: FilterType) => void
 }
 
 export const useTasksStore = create<TaskStore>()((set, get) => ({
   tasks: initialTasks,
+  filteredTasks: initialTasks,
   addTask: (title) => {
     set((state) => ({
       tasks: [
@@ -76,5 +80,28 @@ export const useTasksStore = create<TaskStore>()((set, get) => ({
     })
 
     set({ tasks })
+  },
+  clearCompletedTasks: () => {
+    set((state) => ({
+      tasks: state.tasks.filter((task) => !task.completed)
+    }))
+  },
+  filterTasks: (filter) => {
+    set(state => {
+      const tasks = [...state.tasks]
+      if (filter === 'active') {
+        return {
+          filteredTasks: tasks.filter(task => !task.completed)
+        }
+      }
+
+      if (filter === 'completed') {
+        return {
+          filteredTasks: tasks.filter(task => task.completed)
+        }
+      }
+
+      return { filteredTasks: tasks }
+    })
   }
 }))
