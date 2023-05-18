@@ -9,16 +9,12 @@ export function TaskItem ({ task }: { task: Task }) {
   const [removeTask, toggleTask] = useTasksStore(state => [state.removeTask, state.toggleTask])
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => toggleTask(task.id)}>
-        <View style={styles.done}>
-          <Completed completed={task.completed} />
-          <Text style={[styles.title, task.completed && styles.completed]}>{task.title}</Text>
-        </View>
+      <Pressable onPress={() => toggleTask(task.id)} style={styles.done}>
+        <Completed completed={task.completed} />
+        <Text style={[styles.title, task.completed && styles.completed]}>{task.title}</Text>
       </Pressable>
-      <Pressable onPress={() => removeTask(task.id)}>
-        <View style={styles.delete}>
-          <CrossIcon />
-        </View>
+      <Pressable onPress={() => removeTask(task.id)} style={styles.delete}>
+        <CrossIcon />
       </Pressable>
     </View>
   )
@@ -29,11 +25,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
     borderBottomWidth: 1,
     borderBottomColor: lightTheme.lightGray,
+    paddingHorizontal: 20,
     gap: 12
+    // minHeight: 52
   },
   title: {
     fontSize: 14,
@@ -41,9 +37,12 @@ const styles = StyleSheet.create({
     color: lightTheme.text
   },
   done: {
+    paddingVertical: 16,
     flexDirection: 'row',
     gap: 12,
-    alignItems: 'center'
+    paddingRight: 25,
+    alignItems: 'center',
+    flex: 1
   },
   completed: {
     textDecorationLine: 'line-through'
