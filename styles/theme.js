@@ -7,5 +7,6 @@ export const lightTheme = {
 
 export const colors = {
   primaryGradient: 'hsl(192, 100%, 67%)',
-  secondaryGradient: 'hsl(280, 87%, 65%)'
+  secondaryGradient: 'hsl(280, 87%, 65%)',
+  blue: 'hsl(220, 98%, 61%)'
 }
