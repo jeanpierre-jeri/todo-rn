@@ -3,10 +3,13 @@ import { Heading } from './Heading'
 import { TaskList } from './TaskList'
 import { AddTask } from './AddTask'
 import { Footer } from './Footer'
+import { useTheme } from '../context/theme.context'
+import { MotiView } from 'moti'
 
 export function Layout () {
+  const { theme } = useTheme()
   return (
-    <View>
+    <MotiView style={{ height: '100%' }} animate={{ backgroundColor: theme.background }} transition={{ type: 'timing', duration: 300 }}>
       <Image style={styles.image} source={require('../assets/bg-mobile-light.jpg')} />
       <View style={styles.container}>
         <Heading />
@@ -14,7 +17,7 @@ export function Layout () {
         <TaskList />
         <Footer />
       </View>
-    </View>
+    </MotiView>
   )
 }
 
