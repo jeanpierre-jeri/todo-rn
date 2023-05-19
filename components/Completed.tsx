@@ -1,10 +1,23 @@
-import { StyleSheet, View } from 'react-native'
-import { colors, lightTheme } from '../styles/theme'
+import { StyleSheet } from 'react-native'
+import { colors } from '../styles/theme'
 import { LinearGradient } from 'expo-linear-gradient'
 import { CheckIcon } from './Icons'
+import { MotiView } from 'moti'
+import { useTheme } from '../context/theme.context'
 
 export function Completed ({ completed }: { completed: boolean }) {
-  if (!completed) return <View style={styles.check} />
+  const { theme } = useTheme()
+
+  if (!completed) {
+    return (
+      <MotiView
+        style={styles.check} animate={{ borderColor: theme.border }} transition={{
+          duration: 300,
+          type: 'timing'
+        }}
+      />
+    )
+  }
 
   return (
     <LinearGradient
@@ -28,7 +41,6 @@ const sharedStyles = {
 const styles = StyleSheet.create({
   check: {
     ...sharedStyles,
-    borderColor: lightTheme.lightGray,
     borderWidth: 1
   },
   gradient: {
