@@ -52,24 +52,23 @@ export const useTasksStore = create<TaskStore>()((set, get) => ({
   tasks: initialTasks,
   filteredTasks: initialTasks,
   addTask: (title) => {
-    set((state) => ({
-      tasks: [
-        {
-          id: Crypto.randomUUID(),
-          title,
-          completed: false
-        },
-        ...state.tasks
-      ]
-    }))
+    const tasks = [
+      {
+        id: Crypto.randomUUID(),
+        title,
+        completed: false
+      },
+      ...get().tasks
+    ]
+
+    set({ tasks, filteredTasks: tasks })
   },
   removeTask: (id) => {
-    set((state) => ({
-      tasks: state.tasks.filter((task) => task.id !== id)
-    }))
+    const tasks = get().tasks.filter((task) => task.id !== id)
+    set({ tasks, filteredTasks: tasks })
   },
   toggleTask: (id) => {
-    const tasks = get().tasks.map((task) => {
+    const tasks = get().tasks.map(task => {
       if (task.id === id) {
         return {
           ...task,
@@ -79,12 +78,11 @@ export const useTasksStore = create<TaskStore>()((set, get) => ({
       return task
     })
 
-    set({ tasks })
+    set({ tasks, filteredTasks: tasks })
   },
   clearCompletedTasks: () => {
-    set((state) => ({
-      tasks: state.tasks.filter((task) => !task.completed)
-    }))
+    const tasks = get().tasks.filter((task) => !task.completed)
+    set({ tasks, filteredTasks: tasks })
   },
   filterTasks: (filter) => {
     set(state => {
