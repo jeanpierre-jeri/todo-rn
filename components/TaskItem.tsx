@@ -1,22 +1,24 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text } from 'react-native'
 import { Task } from '../types'
-import { lightTheme } from '../styles/theme'
 import { CrossIcon } from './Icons'
 import { Completed } from './Completed'
 import { useTasksStore } from '../store/tasks.store'
+import { MotiView } from 'moti'
+import { useTheme } from '../context/theme.context'
 
 export function TaskItem ({ task }: { task: Task }) {
   const [removeTask, toggleTask] = useTasksStore(state => [state.removeTask, state.toggleTask])
+  const { theme, colorScheme } = useTheme()
   return (
-    <View style={styles.container}>
+    <MotiView style={styles.container} animate={{ borderColor: theme.border, backgroundColor: theme.listBackground }} transition={{ duration: 300, type: 'timing' }}>
       <Pressable onPress={() => toggleTask(task.id)} style={styles.done}>
         <Completed completed={task.completed} />
-        <Text style={[styles.title, task.completed && styles.completed]}>{task.title}</Text>
+        <Text style={[styles.title, task.completed && styles.completed, { color: theme.text }]}>{task.title}</Text>
       </Pressable>
       <Pressable onPress={() => removeTask(task.id)} style={styles.delete}>
-        <CrossIcon />
+        <CrossIcon fill={colorScheme === 'light' ? '#494C6B' : '#fff'} />
       </Pressable>
-    </View>
+    </MotiView>
   )
 };
 
@@ -26,15 +28,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: lightTheme.lightGray,
     paddingHorizontal: 20,
     gap: 12
-    // minHeight: 52
   },
   title: {
     fontSize: 14,
-    fontFamily: 'JosefinSans-Regular',
-    color: lightTheme.text
+    fontFamily: 'JosefinSans-Regular'
   },
   done: {
     paddingVertical: 16,
