@@ -9,8 +9,8 @@ const filterTypes: FilterType[] = ['all', 'active', 'completed']
 
 export function Footer () {
   const [activeFilter, setActiveFilter] = useState<FilterType>('all')
-  const tasks = useTasksStore(state => state.tasks)
-  const tasksLeft = tasks.filter((task) => !task.completed).length
+  const filteredTasks = useTasksStore(state => state.filteredTasks)
+  const tasksLeft = filteredTasks.filter((task) => !task.completed).length
 
   const clearCompletedTasks = useTasksStore(state => state.clearCompletedTasks)
   const filterTasks = useTasksStore(state => state.filterTasks)
