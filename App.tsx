@@ -1,10 +1,15 @@
+/* eslint-disable import/no-duplicates */
+import 'react-native-reanimated'
+
+import 'react-native-gesture-handler'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+
 import { StatusBar } from 'expo-status-bar'
 import { Layout } from './components/Layout'
-import { StyleSheet, View } from 'react-native'
 import * as SplashScreen from 'expo-splash-screen'
 import { useLoadFonts } from './hooks/useLoadFonts'
 import { useEffect, useState } from 'react'
-import { lightTheme } from './styles/theme'
+import { ThemeProvider } from './context/theme.context'
 
 void SplashScreen.preventAutoHideAsync()
 
@@ -27,17 +32,11 @@ export default function App () {
   if (!ready) return null
 
   return (
-    <View style={styles.container}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <StatusBar style='light' />
-      <Layout />
-    </View>
+      <ThemeProvider>
+        <Layout />
+      </ThemeProvider>
+    </GestureHandlerRootView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: lightTheme.background
-  }
-
-})
