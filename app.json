@@ -29,8 +29,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "eaef8b33-2b98-487c-acbf-8dea9b1979b5"
+        "projectId": "db77c1ed-61c8-4f79-a063-621dbe2dfeed"
       }
-    }
+    },
+    "owner": "jeanpdev"
   }
 }
