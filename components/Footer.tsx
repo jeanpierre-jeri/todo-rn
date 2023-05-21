@@ -1,9 +1,10 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
-import { lightTheme } from '../styles/theme'
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useTasksStore } from '../store/tasks.store'
 import { useState } from 'react'
 import { FilterType } from '../types'
 import { FilterTask } from './FilterTask'
+import { MotiView } from 'moti'
+import { useTheme } from '../context/theme.context'
 
 const filterTypes: FilterType[] = ['all', 'active', 'completed']
 
@@ -12,6 +13,8 @@ export function Footer () {
   const filteredTasks = useTasksStore(state => state.filteredTasks)
   const tasksLeft = filteredTasks.filter((task) => !task.completed).length
 
+  const { theme } = useTheme()
+
   const clearCompletedTasks = useTasksStore(state => state.clearCompletedTasks)
   const filterTasks = useTasksStore(state => state.filterTasks)
 
@@ -19,20 +22,35 @@ export function Footer () {
     filterTasks(filter)
     setActiveFilter(filter)
   }
+
+  const handleClearCompletedTasks = () => {
+    if (!filteredTasks.some((task) => task.completed)) return
+    Alert.alert('Clear Completed', 'Are you sure you want to clear completed tasks?', [
+      {
+        text: 'Cancel',
+        style: 'cancel'
+      },
+      {
+        text: 'Clear',
+        onPress: () => clearCompletedTasks()
+      }
+    ])
+  }
+
   return (
     <View>
-      <View style={styles.info}>
-        <Text>{tasksLeft} {tasksLeft === 1 ? 'item' : 'items'} left</Text>
-        <Pressable onPress={clearCompletedTasks}>
-          <Text>Clear Completed</Text>
+      <MotiView style={styles.info} animate={{ backgroundColor: theme.listBackground }}>
+        <Text style={{ color: theme.text }}>{tasksLeft} {tasksLeft === 1 ? 'item' : 'items'} left</Text>
+        <Pressable onPress={handleClearCompletedTasks}>
+          <Text style={{ color: theme.text, paddingVertical: 16 }}>Clear Completed</Text>
         </Pressable>
-      </View>
+      </MotiView>
 
-      <View style={styles.filters}>
+      <MotiView style={styles.filters} animate={{ backgroundColor: theme.listBackground }}>
         {filterTypes.map((filter) => (
           <FilterTask key={filter} activeFilter={activeFilter} filter={filter} handleFilter={handleFilter} />
         ))}
-      </View>
+      </MotiView>
     </View>
   )
 };
@@ -41,16 +59,12 @@ const styles = StyleSheet.create({
   info: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: lightTheme.light,
-    color: lightTheme.lightGray,
-    paddingHorizontal: 20,
-    paddingVertical: 16
+    alignItems: 'center',
+    paddingHorizontal: 20
   },
   filters: {
     flexDirection: 'row',
     justifyContent: 'center',
-    backgroundColor: lightTheme.light,
-    color: lightTheme.lightGray,
     marginTop: 16
   }
 
