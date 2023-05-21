@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   list: {
     borderRadius: 3,
     overflow: 'hidden',
-    marginTop: 16
+    marginTop: 16,
+    height: '65%'
   }
 })
