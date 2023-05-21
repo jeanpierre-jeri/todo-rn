@@ -10,7 +10,7 @@ export function TaskItem ({ task }: { task: Task }) {
   const [removeTask, toggleTask] = useTasksStore(state => [state.removeTask, state.toggleTask])
   const { theme, colorScheme } = useTheme()
   return (
-    <MotiView style={styles.container} animate={{ borderColor: theme.border, backgroundColor: theme.listBackground }} transition={{ duration: 300, type: 'timing' }}>
+    <MotiView style={styles.container} animate={{ borderColor: theme.border, backgroundColor: theme.listBackground }}>
       <Pressable onPress={() => toggleTask(task.id)} style={styles.done}>
         <Completed completed={task.completed} />
         <Text style={[styles.title, task.completed && styles.completed, { color: theme.text }]}>{task.title}</Text>

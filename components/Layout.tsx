@@ -9,7 +9,7 @@ import { MotiView } from 'moti'
 export function Layout () {
   const { theme } = useTheme()
   return (
-    <MotiView style={{ height: '100%' }} animate={{ backgroundColor: theme.background }} transition={{ type: 'timing', duration: 300 }}>
+    <MotiView style={{ height: '100%' }} animate={{ backgroundColor: theme.background }}>
       <Image style={styles.image} source={require('../assets/bg-mobile-light.jpg')} />
       <View style={styles.container}>
         <Heading />

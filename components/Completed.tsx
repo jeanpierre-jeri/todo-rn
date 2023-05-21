@@ -11,10 +11,7 @@ export function Completed ({ completed }: { completed: boolean }) {
   if (!completed) {
     return (
       <MotiView
-        style={styles.check} animate={{ borderColor: theme.border }} transition={{
-          duration: 300,
-          type: 'timing'
-        }}
+        style={styles.check} animate={{ borderColor: theme.border }}
       />
     )
   }
