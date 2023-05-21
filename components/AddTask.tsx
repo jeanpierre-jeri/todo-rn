@@ -15,7 +15,7 @@ export function AddTask () {
 
   return (
     <View>
-      <TextInput value={title} onChangeText={setTitle} style={[styles.input, { backgroundColor: theme.listBackground }]} placeholder='Create a new todo...' placeholderTextColor={theme.text} onSubmitEditing={handleSubmit} />
+      <TextInput value={title} onChangeText={setTitle} style={[styles.input, { backgroundColor: theme.listBackground, color: theme.text }]} placeholder='Create a new todo...' placeholderTextColor={theme.text} onSubmitEditing={handleSubmit} />
     </View>
   )
 };
