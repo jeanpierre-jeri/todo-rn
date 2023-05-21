@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { MoonIcon, SunIcon } from './Icons'
-import { lightTheme } from '../styles/theme'
+import { colors } from '../styles/theme'
 import { useTheme } from '../context/theme.context'
 import Animated, { Extrapolate, interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   title: {
-    color: lightTheme.light,
+    color: colors.light,
     fontSize: 24,
     fontFamily: 'JosefinSans-Bold',
     letterSpacing: 10
